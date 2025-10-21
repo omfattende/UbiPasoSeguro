@@ -1,0 +1,461 @@
+/* Container principal */
+*{
+  font-family: "Skay", sans-serif;
+}
+.inicio-container {
+  width: 100%;
+  max-width: 100vw;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+/* Secciones de pantalla completa */
+.fullscreen-section {
+  min-height: 100vh;
+  height: 100vh;
+  width: 100%;
+  max-width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  overflow-x: hidden;
+}
+
+.section-content {
+  max-width: 900px;
+  text-align: center;
+  z-index: 2;
+  position: relative;
+  padding: 0 20px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* Animaciones de scroll */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Sección Hero Principal */
+.hero-main {
+  background: url('https://img.freepik.com/fotos-premium/zapato-nino-perdido-arena-playa_262388-2755.jpg');
+  color: rgb(255, 255, 255);
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: "Skay", sans-serif;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="%23ffffff"></path></svg>') repeat-x;
+  background-size: 100% 120px;
+  opacity: 0.1;
+  animation: wave 15s linear infinite;
+  font-family: "Skay", sans-serif;
+}
+
+@keyframes wave {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 1200px 0;
+  }
+}
+
+.hero-title {
+  font-size: 4rem;
+  font-weight: 800;
+  margin: 0 0 1.5rem 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  line-height: 1.2;
+  font-family: "Skay", sans-serif;
+}
+
+.hero-subtitle {
+  font-size: 1.8rem;
+  margin: 0 0 2rem 0;
+  opacity: 0.95;
+  font-weight: 400;
+  font-family: "Skay", sans-serif;
+}
+
+.hero-description {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  line-height: 1.8;
+  opacity: 0.9;
+  font-family: "Skay", sans-serif;
+}
+
+.scroll-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 60px;
+  opacity: 0.8;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.scroll-indicator span {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Sección UbiPrograma */
+.section-ubiprograma {
+  background: url('https://static.vecteezy.com/system/resources/previews/001/265/731/non_2x/map-with-location-pin-vector.jpg');
+  color: #2c3e50;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Sección Ubicación */
+.section-ubicacion {
+  background: url('https://img.freepik.com/fotos-premium/mapa-detallado-que-muestra-ubicacion-especifica-marcada-dos-alfileres-vibrantes-que-simbolizan-puntos-partida-destino-sistema-navegacion-gps-planificacion-rutas-eficiente_1278797-8925.jpg');
+  color: #2c3e50;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Sección Profesionales */
+.section-profesionales {
+  background: url('https://www.groupe-calliope.com/wp-content/uploads/2023/04/20230417-pourquoi-choisir-touchdown.jpg');
+  color: #2c3e50;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Sección Contacto */
+.section-contacto {
+  background: url('https://th.bing.com/th/id/R.3116bce578d66d4149a595e99f01e02e?rik=AexUWz6pqX%2bcRg&riu=http%3a%2f%2fblog.qservus.com%2fwp-content%2fuploads%2f2024%2f01%2fTipos-de-comentarios-de-los-clientes_-comentarios-directos-e-indirectos.webp&ehk=towkvYU%2bzccsexE381mk2Q4D6vZu50rEy2GbZkCCoDY%3d&risl=&pid=ImgRaw&r=0');
+  color: #2c3e50;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Sección Footer */
+.section-footer {
+  padding: 0;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+.section-footer app-footer {
+  width: 100%;
+  display: flex;
+  flex: 1;
+}
+
+/* Iconos de sección */
+.section-icon {
+  margin-bottom: 30px;
+  opacity: 0.95;
+}
+
+.section-icon svg {
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* Títulos de sección */
+.section-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin: 0 0 1.5rem 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  font-family: "Skay", sans-serif;
+}
+
+.section-description {
+  font-size: 1.3rem;
+  line-height: 1.8;
+  margin: 0 0 2.5rem 0;
+  opacity: 0.95;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: "Skay", sans-serif;
+}
+
+/* Estadísticas */
+.feature-stats {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  margin-top: 50px;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-family: "Skay", sans-serif;
+}
+
+.stat-number {
+  font-size: 3.5rem;
+  font-weight: 800;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.stat-label {
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  opacity: 0.9;
+}
+
+/* Lista de características */
+.features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 500px;
+  margin: 40px auto 0;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: rgba(0, 0, 0, 0.15);
+  padding: 20px 30px;
+  border-radius: 50px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  color: white;
+}
+
+.feature-item:hover {
+  background: rgba(0, 0, 0, 0.25);
+  transform: translateX(10px);
+}
+
+.feature-item svg {
+  flex-shrink: 0;
+}
+
+.feature-item span {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+/* Botones */
+.cta-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+
+.btn {
+  padding: 18px 40px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-primary {
+  background: #3498db;
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary:hover {
+  background: #2980b9;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: white;
+  border: 3px solid white;
+}
+
+.btn-secondary:hover {
+  background: white;
+  color: #2c3e50;
+  transform: translateY(-3px);
+}
+
+.btn-outline {
+  background: rgba(255, 255, 255, 0.2);
+  color: #2c3e50;
+  border: 2px solid #2c3e50;
+  backdrop-filter: blur(10px);
+}
+
+.btn-outline:hover {
+  background: #2c3e50;
+  color: white;
+  transform: translateY(-3px);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .hero-title {
+    font-size: 3rem;
+  }
+  
+  .section-title {
+    font-size: 2.8rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.5rem;
+  }
+  
+  .section-description {
+    font-size: 1.1rem;
+  }
+
+  .fullscreen-section {
+    padding: 20px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .fullscreen-section {
+    padding: 20px;
+    justify-content: center;
+  }
+  
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .section-title {
+    font-size: 2.2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.3rem;
+  }
+  
+  .hero-description,
+  .section-description {
+    font-size: 1rem;
+  }
+  
+  .feature-stats {
+    gap: 40px;
+  }
+  
+  .stat-number {
+    font-size: 2.5rem;
+  }
+  
+  .stat-label {
+    font-size: 0.9rem;
+  }
+  
+  .section-icon svg {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .btn {
+    padding: 15px 30px;
+    font-size: 1rem;
+  }
+  
+  .features-list {
+    max-width: 100%;
+  }
+  
+  .feature-item {
+    padding: 15px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .cta-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .btn {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .feature-stats {
+    flex-direction: column;
+    gap: 30px;
+  }
+}

@@ -1,0 +1,183 @@
+<div class="dashboard-container">
+  
+  <!-- Dashboard Header -->
+  <div class="dashboard-header">
+    <div class="header-content">
+      <h1>Panel de Control</h1>
+      <p class="header-subtitle">Gestión de Ubicaciones en Tiempo Real</p>
+    </div>
+    <div class="header-stats">
+      <div class="stat-box">
+        <span class="stat-value">{{ userLocations.length }}</span>
+        <span class="stat-label">Ubicaciones</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-value">{{ currentLocation ? 'Activo' : 'Inactivo' }}</span>
+        <span class="stat-label">Estado GPS</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard Grid -->
+  <div class="dashboard-grid">
+    
+    <!-- Panel Izquierdo: Mapa -->
+    <div class="dashboard-panel map-panel">
+      <div class="panel-header">
+        <h2>Mapa en Tiempo Real</h2>
+        <div class="panel-actions">
+          <a *ngIf="currentLocation" 
+             [href]="'https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=' + currentLocation.latitude + ',' + currentLocation.longitude + '&heading=-45&pitch=0&fov=80'"
+             target="_blank" 
+             class="btn-icon" 
+             title="Abrir en Street View">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+          </a>
+          <button (click)="getCurrentLocation()" class="btn-icon" title="Centrar en mi ubicación">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-3.9 4 4 0 0 1 0-.2 4 4 0 0 1 5-3.9A10 10 0 0 0 12 2z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </button>
+        </div>
+      </div>
+      
+      @if (locationError) {
+        <div class="location-error">
+          <p>⚠️ {{ locationError }}</p>
+          <button (click)="getCurrentLocation()" class="btn-retry">Intentar de nuevo</button>
+        </div>
+      }
+      
+      <!-- Contenedor para el mapa -->
+      <div class="map-container" #mapContainer></div>
+      
+      @if (currentLocation) {
+        <div class="map-coordinates">
+          <span>Lat: {{ currentLocation.latitude.toFixed(6) }}</span>
+          <span>Lng: {{ currentLocation.longitude.toFixed(6) }}</span>
+          <span>Precisión: {{ currentLocation.accuracy ? currentLocation.accuracy.toFixed(2) + 'm' : 'N/A' }}</span>
+        </div>
+      }
+    </div>
+    </div>
+
+    <!-- Panel Derecho Superior: Registrar Ubicación -->
+    <div class="dashboard-panel form-panel">
+      <div class="panel-header">
+        <h2>Registrar Ubicación</h2>
+      </div>
+    
+      <div class="panel-content">
+        @if (!currentLocation) {
+          <div class="info-message">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            <p>Activa el GPS para registrar tu ubicación</p>
+          </div>
+        } @else {
+          @if (registroSuccess) {
+            <div class="alert alert-success">
+              <span class="alert-icon">✓</span>
+              <p>{{ registroSuccess }}</p>
+            </div>
+          }
+          
+          @if (registroError) {
+            <div class="alert alert-error">
+              <span class="alert-icon">⚠</span>
+              <p>{{ registroError }}</p>
+            </div>
+          }
+          
+          <form (ngSubmit)="registrarUbicacion()" class="dashboard-form">
+            <div class="form-group">
+              <label for="nombre">Nombre</label>
+              <input 
+                type="text" 
+                id="nombre" 
+                name="nombre"
+                [(ngModel)]="registroForm.nombre"
+                required
+                [disabled]="registrando"
+                placeholder="Tu nombre">
+            </div>
+            
+            <div class="form-group">
+              <label for="comentario">Descripción</label>
+              <textarea 
+                id="comentario" 
+                name="comentario"
+                [(ngModel)]="registroForm.comentario"
+                required
+                rows="3"
+                [disabled]="registrando"
+                placeholder="Describe la ubicación"></textarea>
+            </div>
+            
+            <button type="submit" class="btn-dashboard btn-primary" [disabled]="registrando">
+              @if (registrando) {
+                <span class="spinner-small"></span>
+                Registrando...
+              } @else {
+                Registrar
+              }
+            </button>
+          </form>
+        }
+      </div>
+    </div>
+
+    <!-- Panel Derecho Inferior: Lista de Ubicaciones -->
+    <div class="dashboard-panel list-panel">
+      <div class="panel-header">
+        <h2>Ubicaciones Registradas</h2>
+        <span class="badge">{{ userLocations.length }}</span>
+      </div>
+    
+      <div class="panel-content scrollable">
+        @if (userLocations.length === 0) {
+          <div class="empty-state">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <p>No hay ubicaciones registradas</p>
+          </div>
+        } @else {
+          <div class="location-list">
+            @for (location of userLocations; track location.id) {
+              <div class="location-item">
+                <div class="location-item-header">
+                  <div class="location-item-info">
+                    <h3>{{ location.nombre }}</h3>
+                    <span class="time-badge">{{ getTimeAgo(location.timestamp) }}</span>
+                  </div>
+                  <button (click)="eliminarUbicacion(location.id)" class="btn-icon-small" title="Eliminar">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="3 6 5 6 21 6"></polyline>
+                      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    </svg>
+                  </button>
+                </div>
+                <p class="location-item-comment">{{ location.comentario }}</p>
+                <div class="location-item-footer">
+                  <span class="coords-text">{{ location.latitude.toFixed(4) }}, {{ location.longitude.toFixed(4) }}</span>
+                  <button (click)="verEnMapa(location.latitude, location.longitude)" class="btn-link">
+                    Ver en mapa →
+                  </button>
+                </div>
+              </div>
+            }
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+

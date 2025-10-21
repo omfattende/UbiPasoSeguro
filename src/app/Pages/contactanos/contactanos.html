@@ -1,0 +1,128 @@
+<div class="contactanos-container">
+
+
+  <div class="contact-content">
+    <section class="contact-info">
+      <h2>Información de Contacto</h2>
+      <div class="info-card">
+        <div class="info-icon"></div>
+        <h3>Teléfono</h3>
+        <p>+52 1 81 1625 9551
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon"></div>
+        <h3>Email</h3>
+        <p>valadezandoni157@gmail.com</p>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon">🌐</div>
+        <h3>Redes Sociales</h3>
+        <div class="social-links">
+          <a href="#" class="social-link">Facebook</a>
+          <a href="#" class="social-link">Instagram</a>
+          <a href="#" class="social-link">Twitter</a>
+          <a href="#" class="social-link">LinkedIn</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-form-section">
+      <h2>Envíanos un Mensaje</h2>
+      
+      <!-- Mensaje de éxito -->
+      @if (successMessage) {
+        <div class="alert alert-success">
+          <span class="alert-icon">✓</span>
+          <p>{{ successMessage }}</p>
+        </div>
+      }
+      
+      <!-- Mensaje de error -->
+      @if (errorMessage) {
+        <div class="alert alert-error">
+          <span class="alert-icon">⚠</span>
+          <p>{{ errorMessage }}</p>
+        </div>
+      }
+      
+      <form (ngSubmit)="onSubmit()" class="contact-form">
+        <div class="form-group">
+          <label for="nombre">Nombre Completo *</label>
+          <input 
+            type="text" 
+            id="nombre" 
+            name="nombre"
+            [(ngModel)]="formData.nombre"
+            required
+            [disabled]="sending"
+            placeholder="Tu nombre completo">
+        </div>
+
+        <div class="form-group">
+          <label for="email">Correo Electrónico *</label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email"
+            [(ngModel)]="formData.email"
+            required
+            [disabled]="sending"
+            placeholder="tu@email.com">
+        </div>
+
+        <div class="form-group">
+          <label for="telefono">Teléfono</label>
+          <input 
+            type="tel" 
+            id="telefono" 
+            name="telefono"
+            [(ngModel)]="formData.telefono"
+            [disabled]="sending"
+            placeholder="(55) 1234-5678">
+        </div>
+
+        <div class="form-group">
+          <label for="asunto">Asunto *</label>
+          <select 
+            id="asunto" 
+            name="asunto"
+            [(ngModel)]="formData.asunto"
+            required
+            [disabled]="sending">
+            <option value="">Selecciona un asunto</option>
+            <option value="informacion">Solicitar Información</option>
+            <option value="servicio">Contratar un Servicio</option>
+            <option value="profesional">Ser Profesional UbiCuidado</option>
+            <option value="soporte">Soporte Técnico</option>
+            <option value="otro">Otro</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="mensaje">Mensaje *</label>
+          <textarea 
+            id="mensaje" 
+            name="mensaje"
+            [(ngModel)]="formData.mensaje"
+            required
+            rows="6"
+            [disabled]="sending"
+            placeholder="Escribe tu mensaje aquí..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit" [disabled]="sending">
+          @if (sending) {
+            <span class="spinner-small"></span>
+            Enviando...
+          } @else {
+            Enviar Mensaje
+          }
+        </button>
+      </form>
+    </section>
+  </div>
+</div>
+
+<app-footer></app-footer>

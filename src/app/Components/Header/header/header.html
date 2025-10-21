@@ -1,0 +1,65 @@
+<header class="main-header">
+  <div class="header-container">
+    <div class="logo">
+      <a routerLink="/inicio">
+        <div class="logo-icon"></div>
+        <span class="logo-text">Paso Seguro</span>
+      </a>
+    </div>
+
+    <button class="menu-toggle" (click)="toggleMenu()" [class.active]="menuOpen">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="main-nav" [class.active]="menuOpen">
+      <ul class="nav-list">
+        <li>
+          <a routerLink="/inicio" 
+             routerLinkActive="active" 
+             [routerLinkActiveOptions]="{exact: true}"
+             (click)="closeMenu()">
+            Inicio
+          </a>
+        </li>
+        <li>
+          <a routerLink="/ubi-programa" 
+             routerLinkActive="active"
+             (click)="closeMenu()">
+            UbiPrograma
+          </a>
+        </li>
+        <li>
+          <a routerLink="/quienes-somos" 
+             routerLinkActive="active"
+             (click)="closeMenu()">
+            Quiénes Somos
+          </a>
+        </li>
+        <li>
+          <a routerLink="/que-hacemos" 
+             routerLinkActive="active"
+             (click)="closeMenu()">
+            Qué Hacemos
+          </a>
+        </li>
+        <li>
+          <a routerLink="/ninos-en-problemas" 
+             routerLinkActive="active"
+             (click)="closeMenu()">
+            Niños en Problemas
+          </a>
+        </li>
+        <li>
+          <a routerLink="/contactanos" 
+             routerLinkActive="active"
+             class="btn-contact"
+             (click)="closeMenu()">
+            Contáctanos
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

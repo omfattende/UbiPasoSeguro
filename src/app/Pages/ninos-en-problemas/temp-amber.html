@@ -1,0 +1,60 @@
+<div class="amber-alert-container">
+  <div class="amber-alert-header">
+    <h1>Alerta AMBER</h1>
+    <p>Sistema de Alerta de Menores Desaparecidos</p>
+  </div>
+  
+  <div class="amber-alert-content">
+    <div class="amber-alert-description">
+      <h2>¿Qué es la Alerta AMBER?</h2>
+      <p>La Alerta AMBER es un sistema de notificación de menores desaparecidos que ayuda a localizar niños, niñas y adolescentes que han sido sustraídos o se encuentran en peligro inminente.</p>
+      
+      <div class="amber-alert-stats">
+        <div class="stat-item">
+          <span class="stat-number">9 de cada 10</span>
+          <span class="stat-label">casos se resuelven gracias a la comunidad</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">+500</span>
+          <span class="stat-label">niños localizados exitosamente</span>
+        </div>
+      </div>
+      
+      <h3>¿Qué hacer si ves a un niño desaparecido?</h3>
+      <ul class="action-list">
+        <li>No te acerques al sospechoso</li>
+        <li>Llama de inmediato al 911</li>
+        <li>Proporciona la mayor cantidad de detalles posibles</li>
+        <li>No compartas información no verificada en redes sociales</li>
+      </ul>
+    </div>
+    
+    <div class="amber-alert-cases">
+      <h2>Casos Recientes</h2>
+      <div class="case-card" *ngFor="let case of activeCases">
+        <div class="case-image">
+          <img [src]="case.photo" [alt]="case.name">
+        </div>
+        <div class="case-details">
+          <h3>{{case.name}}, {{case.age}} años</h3>
+          <p><strong>Desaparecido desde:</strong> {{case.missingSince}}</p>
+          <p><strong>Última ubicación:</strong> {{case.lastSeen}}</p>
+          <p><strong>Contacto:</strong> {{case.contact}}</p>
+        </div>
+      </div>
+      
+      <div class="report-button">
+        <button (click)="reportSighting()">Reportar avistamiento</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="amber-alert-resources">
+    <h2>Recursos Adicionales</h2>
+    <div class="resource-links">
+      <a href="#" class="resource-link">Protocolo de Búsqueda</a>
+      <a href="#" class="resource-link">Consejos de Seguridad</a>
+      <a href="#" class="resource-link">Preguntas Frecuentes</a>
+    </div>
+  </div>
+</div>
